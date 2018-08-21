@@ -1,0 +1,21 @@
+.content-title {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: 1fr;
+	justify-items: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.header-photo {
+	display: grid;
+	background-image: url(photoque1.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 180px;
+	height: 360px;
+	box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+}
+
+
+
