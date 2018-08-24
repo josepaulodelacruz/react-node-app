@@ -5,28 +5,32 @@ import Backdrop from './Components/Backdrop/Backdrop';
 import './App.css';
 import io from 'socket.io-client';
 
+
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      endpoint: "http://192.168.0.27:5000",
+      endpoint: "http://192.168.0.16:5000",
       SideDrawerOpen: false,
       response: '',
-      socket: null
+      socket: null,
+      button: false,
+      io: null
     };
   }
 
   componentWillMount(){
-    this.initSocket()
-  };
+  	this.initSocket();
+  }
 
  initSocket = () => {
    const socket = io(this.state.endpoint);
-   socket.on('connection', () => {
-        console.log('Connected');
-   })
-   this.setState({socket});
- }
+   socket.on('connect', (id) => {
+        console.log(`Connected your SOCKET ID is ${socket.id}`);
+    });
+	   this.setState({socket});	
+
+ }	
 
   componentDidMount(){
     this.callApi()
@@ -53,13 +57,16 @@ class App extends Component {
     this.setState({SideDrawerOpen: false});
   }
 
-  handleClick(){
-    console.log('click');
+
+  handleClick = () => {
+  	console.log(this.state.socket.id + 'REQUEST');
+  	this.state.socket.emit('event', 'click');
   }
+
+
 
   render() {
     let backdrop;
-
     if(this.state.SideDrawerOpen){
       backdrop = <Backdrop click={this.backdropClickHandler}/>
     }
@@ -70,7 +77,7 @@ class App extends Component {
           {backdrop}
           <div className="content" style={{paddingTop: '70px'}}>
             <h2>{this.state.response}</h2>
-            <button onClick={this.handleClick}>Click</button>
+            <button onClick={this.handleClick}>REQUEST</button>
           </div>
       </div>
 

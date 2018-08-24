@@ -10,13 +10,28 @@ app.get('/api/con', (req, res) => {
 });
 
 const io = socket(server);
-io.on('connection', function(socket){
+io.on('connection', socket => {
 	console.log(`User Connected: ${socket.id}`);
+	
+	socket.on('event', click => {
+		console.log(`User ${socket.id} REQUEST!`);
+	})
 
 	socket.on('disconnect', () => {
     console.log(`User Disconnected ${socket.id}`)
   })
+	
 })
+
+	
+
+
+
+
+// for receiving an event to client.
+
+
+
 
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
