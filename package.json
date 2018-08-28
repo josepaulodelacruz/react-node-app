@@ -33,6 +33,5 @@
     "concurrently": "^3.6.1",
     "gh-pages": "^1.2.0",
     "nodemon": "^1.18.3"
-  },
-  // "proxy": "http://localhost:5000"
+  }
 }
