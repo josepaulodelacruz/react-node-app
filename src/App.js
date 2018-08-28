@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      endpoint: "http://192.168.0.15:5000",
+      // endpoint: "http://192.168.0.15:5000",
       SideDrawerOpen: false,
       response: '',
       socket: null,
