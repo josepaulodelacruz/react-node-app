@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Toolbar from './Components/Toolbar/Toolbar';
 import SideDrawer from './Components/SideDrawer/SideDrawer';
 import Backdrop from './Components/Backdrop/Backdrop';
+import GoogleMap from './Components/GoogleMap/GoogleMap';
 import './App.css';
 import io from 'socket.io-client';
 
@@ -10,7 +11,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      endpoint: "http://192.168.0.16:5000",
+      endpoint: "http://192.168.0.15:5000",
       SideDrawerOpen: false,
       response: '',
       socket: null,
@@ -28,8 +29,7 @@ class App extends Component {
    socket.on('connect', (id) => {
         console.log(`Connected your SOCKET ID is ${socket.id}`);
     });
-	   this.setState({socket});	
-
+	   this.setState({socket});
  }	
 
   componentDidMount(){
@@ -75,10 +75,10 @@ class App extends Component {
           <Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>
           <SideDrawer show={this.state.SideDrawerOpen}/>
           {backdrop}
-          <div className="content" style={{paddingTop: '70px'}}>
-            <h2>{this.state.response}</h2>
-            <button onClick={this.handleClick}>REQUEST</button>
+          <div className="content" style={{paddingTop: '50px'}}>
+              <GoogleMap/>
           </div>
+           <button onClick={this.handleClick}>REQUEST</button>    
       </div>
 
     );

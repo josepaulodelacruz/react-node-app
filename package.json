@@ -5,8 +5,14 @@
   "homepage": "http://josepaulodelacruz.github.io/react-template",
   "dependencies": {
     "express": "^4.16.3",
+    "google-maps-react": "^2.0.2",
+    "mapbox-gl": "^0.48.0",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-geolocated": "^2.4.0",
+    "react-map-gl": "^3.3.4",
+    "react-native-mapbox-gl": "^5.2.1-deprecated",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "socket.io": "^2.1.1",
@@ -14,7 +20,7 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "concurrently 'npm run react' 'npm run server'",
+    "start": "concurrently --kill-others \"set HTTPS=true&&npm run react\" \"npm run server\"",
     "react": "react-scripts start",
     "server": "nodemon src/server/server.js",
     "build": "react-scripts build",

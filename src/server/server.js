@@ -13,6 +13,7 @@ const io = socket(server);
 io.on('connection', socket => {
 	console.log(`User Connected: ${socket.id}`);
 	
+	// for receiving an event to client.
 	socket.on('event', click => {
 		console.log(`User ${socket.id} REQUEST!`);
 	})
@@ -27,8 +28,6 @@ io.on('connection', socket => {
 
 
 
-
-// for receiving an event to client.
 
 
 
