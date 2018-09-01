@@ -4,14 +4,15 @@ import SideDrawer from './Components/SideDrawer/SideDrawer';
 import Backdrop from './Components/Backdrop/Backdrop';
 import GoogleMap from './Components/GoogleMap/GoogleMap';
 import './App.css';
-// import io from 'socket.io-client';
+import './Components/GoogleMap/MarkerStyle.css';
+import io from 'socket.io-client';
 
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      // endpoint: "http://192.168.0.15:5000",
+      // endpoint: "http://192.168.0.14:5000",
       SideDrawerOpen: false,
       response: '',
       socket: null,
@@ -20,9 +21,9 @@ class App extends Component {
     };
   }
 
-  // componentWillMount(){
-  // 	this.initSocket();
-  // }
+ //  componentWillMount(){
+ //  	this.initSocket();
+ //  }
 
  // initSocket = () => {
  //   const socket = io(this.state.endpoint);
@@ -32,20 +33,20 @@ class App extends Component {
 	//    this.setState({socket});
  // }	
 
-  // componentDidMount(){
-  //   this.callApi()
-  //     .then(res => this.setState({ response: res.express}))
-  //     .catch(err => console.log(err));
-  // }
+ //  componentDidMount(){
+ //    this.callApi()
+ //      .then(res => this.setState({ response: res.express}))
+ //      .catch(err => console.log(err));
+ //  }
 
-  // callApi = async () => {
-  //   const response = await fetch('/api/con');
-  //   const body = await response.json();
+ //  callApi = async () => {
+ //    const response = await fetch('/api/con');
+ //    const body = await response.json();
 
-  //   if(response.status !== 200) throw Error(body.message);
+ //    if(response.status !== 200) throw Error(body.message);
 
-  //   return body;
-  // }
+ //    return body;
+ //  }
 
   drawerToggleClickHandler = () => {
     this.setState((prevState) => {

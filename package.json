@@ -12,6 +12,7 @@
     "react-dom": "^16.4.2",
     "react-geolocated": "^2.4.0",
     "react-map-gl": "^3.3.4",
+    "react-mapbox-gl": "^3.9.2",
     "react-native-mapbox-gl": "^5.2.1-deprecated",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
