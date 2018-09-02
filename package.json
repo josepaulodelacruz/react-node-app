@@ -21,7 +21,7 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently --kill-others \"set HTTPS=true&&npm run react\" \"npm run server\"",
     "react": "react-scripts start",
     "server": "nodemon src/server/server.js",
     "build": "react-scripts build",
@@ -34,5 +34,6 @@
     "concurrently": "^3.6.1",
     "gh-pages": "^1.2.0",
     "nodemon": "^1.18.3"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

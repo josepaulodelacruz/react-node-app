@@ -5,10 +5,12 @@ const server = http.createServer(app);
 const socket = require('socket.io');
 const port = process.env.PORT || 5000;
 
+
 app.get('/api/con', (req, res) => {
   res.send({ express: 'Back end server connected' });
 });
 
+// on going TCP connection client-server
 const io = socket(server);
 io.on('connection', socket => {
 	console.log(`User Connected: ${socket.id}`);
