@@ -62,8 +62,12 @@ class App extends Component {
 
   handleClick = () => {
     // SENDING AN EVENT TO THE SERVER
-  	console.log(this.state.socket.id + 'REQUEST');
+  	console.log(`${this.state.socket.id}  REQUEST`);
   	this.state.socket.emit('event', 'click');
+  }
+
+  sendLocation = (props) => {
+    console.log('location');
   }
 
 
@@ -81,7 +85,7 @@ class App extends Component {
           {backdrop}
           <div className="content" style={{paddingTop: '50px'}}>
               {/*Displaying Map from the main component*/}
-              <GoogleMap/>
+              <GoogleMap userLocation={this.sendLocation}/>
           </div>
            <button onClick={this.handleClick}>REQUEST</button>    
       </div>

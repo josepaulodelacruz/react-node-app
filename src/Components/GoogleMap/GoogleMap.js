@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, {Marker} from "react-mapbox-gl";
+import MarkLocation from './MarkLocation';
 
 
 // const MAPBOX_TOKEN = 'pk.eyJ1IjoiamV5cGkiLCJhIjoiY2psOWI0MHA1M2ZuejNwcXJ1d2xjbXpiYyJ9.n8oaiL9SWvs1NJpx67_g6w'; 
 // Set your mapbox token here
 
-const Map = ReactMapboxGl({
-  accessToken:
-    'pk.eyJ1IjoiamV5cGkiLCJhIjoiY2psOWI0MHA1M2ZuejNwcXJ1d2xjbXpiYyJ9.n8oaiL9SWvs1NJpx67_g6w'
-});
+
+
 
 export default class GoogleMap extends Component {
      state = {
@@ -36,8 +34,11 @@ export default class GoogleMap extends Component {
       }
     }
 
-  render() {
-    // Browsers Geolocation function
+    componentWillMount(){
+      this.geoLocate();
+    }
+
+    geoLocate = () => {
        if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition((position) => {
          this.setState({
@@ -48,24 +49,13 @@ export default class GoogleMap extends Component {
            }
          })
       })
+      }
     }
 
+  
+  render() {
     return (
-      // Map rendering
-     <Map
-        style="mapbox://styles/mapbox/dark-v9"
-        containerStyle={{
-          height: "calc(100vh - 250px)",
-          width: "100vw"
-        }}
-        center={[this.state.viewport.longitude, this.state.viewport.latitude]}
-        zoom={[16]}
-      >
-        <Marker coordinates={[this.state.viewport.longitude, this.state.viewport.latitude]} anchor="bottom">
-          <div className="mapMarkerStyle" onClick={this.handleClick} />
-        </Marker>
-      </Map>
-
+      <MarkLocation coordinates={this.state.viewport}/>
     );
   }
 }
