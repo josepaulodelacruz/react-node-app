@@ -3,6 +3,7 @@ import Toolbar from './Components/Toolbar/Toolbar';
 import SideDrawer from './Components/SideDrawer/SideDrawer';
 import Backdrop from './Components/Backdrop/Backdrop';
 import GoogleMap from './Components/GoogleMap/GoogleMap';
+import FormService from './Components/Body/FormService';
 import './App.css';
 import './Components/GoogleMap/MarkerStyle.css';
 import io from 'socket.io-client';
@@ -66,11 +67,6 @@ class App extends Component {
   	this.state.socket.emit('event', 'click');
   }
 
-  sendLocation = (props) => {
-    console.log('location');
-  }
-
-
 
   render() {
     // Conditional Rendering
@@ -87,7 +83,10 @@ class App extends Component {
               {/*Displaying Map from the main component*/}
               <GoogleMap userLocation={this.sendLocation}/>
           </div>
-           <button onClick={this.handleClick}>REQUEST</button>    
+          <FormService/>
+          <div className="btn-request">
+             <button onClick={this.handleClick}>REQUEST</button> 
+          </div>        
       </div>
 
     );
