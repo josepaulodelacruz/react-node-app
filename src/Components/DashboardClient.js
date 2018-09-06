@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import Toolbar from './Toolbar/Toolbar';
-import SideDrawer from './SideDrawer/SideDrawer';
-import Backdrop from './Backdrop/Backdrop';
 import GoogleMap from './GoogleMap/GoogleMap';
 import FormService from './Body/FormService';
+import NavBar from './NavBar';
 import './GoogleMap/MarkerStyle.css';
 import io from 'socket.io-client';
 
@@ -49,15 +47,7 @@ class DashboardClient extends Component {
     return body;
   }
   // SIDE BAR TOGGLING
-  drawerToggleClickHandler = () => {
-    this.setState((prevState) => {
-      return{SideDrawerOpen: !prevState.SideDrawerOpen}
-    });
-  }
 
-  backdropClickHandler = () => {
-    this.setState({SideDrawerOpen: false});
-  }
 
 
   handleClick = () => {
@@ -69,26 +59,18 @@ class DashboardClient extends Component {
 
 
   render() {
-    // Conditional Rendering
-    let backdrop;
-    if(this.state.SideDrawerOpen){
-      backdrop = <Backdrop click={this.backdropClickHandler}/>
-    }
     return (
-      <div style={{height: '100%'}}>
-          <Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>
-          <SideDrawer show={this.state.SideDrawerOpen}/>
-          {backdrop}
+      <div>
+        <NavBar/>
           <div className="content" style={{paddingTop: '50px'}}>
               {/*Displaying Map from the main component*/}
               <GoogleMap/>
           </div>
-          <FormService/>
+            <FormService/>
           <div className="btn-request">
              <button onClick={this.handleClick}>REQUEST</button> 
-          </div>        
-      </div>
-
+          </div>
+      </div>        
     );
   }
 }

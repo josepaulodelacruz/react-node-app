@@ -4,12 +4,11 @@ import './App.css';
 
 class App extends Component {
   render(){
-    // Conditional Rendering
     return (
-        <div className="App">
-            <Main/>
-        </div>
-     );
+      <div className="App">
+        <Main/>
+      </div>
+    );
   }
 }
 

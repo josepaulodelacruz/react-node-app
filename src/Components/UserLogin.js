@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Login from './Login';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import uuid from 'uuid';
 
 
@@ -11,7 +11,9 @@ class UserLogin extends Component {
         user: [],
         comparison: '',
         redirect: false,
-        error: false
+        error: false,
+        type: '',
+        currentLogin: []
     };
   }
 
@@ -19,15 +21,15 @@ class UserLogin extends Component {
     this.setState({user: [
        {
          id: uuid.v4(),
-         username: 'Admin',
+         username: 'Client',
          password: 'password',
-         type: 'admin'
+         type: 'Client'
        },
        {
          id: uuid.v4(),
-         username: 'Client',
+         username: 'Admin',
          password: '123456',
-         type: 'client'
+         type: 'Admin'
        },
        {
          id: uuid.v4(),
@@ -40,10 +42,11 @@ class UserLogin extends Component {
     
     
     handleSubmitUser(props){
-    this.state.user.sort(user => {
+    this.state.user.map(user => {
         if(props.userLogin === user.username && props.passLogin === user.password){
           console.log('sucess');
-          this.setState({redirect: true});
+          this.setState({currentLogin: user});
+          this.setState({redirect: true});  
         }else {
           this.setState({error: true});
         }
@@ -53,9 +56,15 @@ class UserLogin extends Component {
   render(){
     // Conditional Rendering
     if(this.state.redirect){
-      return(
+      if(this.state.currentLogin.type === 'Client'){
+        return(
         <Redirect to='/DashboardClient'/>
-      )
+        );
+      }else if(this.state.currentLogin.type === 'Dispatcher'){
+        return(
+          <Redirect to='/Dispatcher'/>
+        );
+      }
     }else if (this.state.error){
       alert('Incorrect Username and Password');
     }
@@ -64,8 +73,6 @@ class UserLogin extends Component {
         <div className="App">
             <Login userComparison={this.handleSubmitUser.bind(this)}/>
         </div>
-        
-
      );
   }
 }
