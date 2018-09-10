@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Login.css';
 
 class Login extends Component {
 	constructor(props){
@@ -22,9 +23,9 @@ class Login extends Component {
 	}
 	render(){
 		return (	
-			<div>
-				<h3>Login</h3>
-				<form>
+			<div className="Login">
+				<h3 className="Login-form">Login</h3>
+				<form className="form-nav">
 					<div>
 						<label>Username</label>
 						<input type="text" ref="username"/>

@@ -5,17 +5,21 @@ import NavBar from './NavBar';
 import './GoogleMap/MarkerStyle.css';
 import io from 'socket.io-client';
 
-
+let request = 0;
 class DashboardClient extends Component {
   constructor(props){
     super(props);
     this.state = {
       // endpoint: "http://192.168.0.14:5000",
+      // endpoint: "http://localhost:5000",
+      Client: 'Client',
       SideDrawerOpen: false,
       response: '',
       socket: null,
       button: false,
-      io: null
+      io: null,
+      latitude: 0,
+      longitude: 0
     };
   }
 
@@ -23,11 +27,12 @@ class DashboardClient extends Component {
   	this.initSocket();
   }
 
-// Server Communication client-tos-server
+// Server Communication client-to-server
  initSocket = () => {
    const socket = io(this.state.endpoint);
-   socket.on('connect', (id) => {
+   socket.on('connect', (id, Client) => {
         console.log(`Connected your SOCKET ID is ${socket.id}`);
+        socket.emit('User', this.state.Client);
     });
 	   this.setState({socket});
  }	
@@ -49,12 +54,21 @@ class DashboardClient extends Component {
   // SIDE BAR TOGGLING
 
 
+  RenderCoordinates = (props) => {
+     this.setState({latitude: props.latitude});
+    this.setState({longitude: props.longitude});
+    console.log(this.state.latitude, this.state.longitude);
+  }
 
   handleClick = () => {
-    // SENDING AN EVENT TO THE SERVER
-  	console.log(`${this.state.socket.id}  REQUEST`);
-  	this.state.socket.emit('event', 'click');
-    
+    if(request < 1){
+      console.log(`${this.state.socket.id}  REQUEST`);
+    this.state.socket.emit('client', this.state.latitude, this.state.longitude);
+    request++;
+    }else{
+      alert('REQUEST LIMIT IS ONLY 1');
+      return 0;
+    }
   }
 
 
@@ -64,7 +78,7 @@ class DashboardClient extends Component {
         <NavBar/>
           <div className="content" style={{paddingTop: '50px'}}>
               {/*Displaying Map from the main component*/}
-              <GoogleMap/>
+              <GoogleMap ClientCoords={this.RenderCoordinates}/>
           </div>
             <FormService/>
           <div className="btn-request">

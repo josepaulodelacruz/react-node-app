@@ -41,6 +41,8 @@ export default class GoogleMap extends Component {
              latitude: position.coords.latitude,
              longitude: position.coords.longitude
            }
+         },function(){
+           this.props.ClientCoords(this.state.viewport);
          })
       })
       }

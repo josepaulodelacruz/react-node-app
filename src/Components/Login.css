@@ -1,0 +1,16 @@
+.Login {
+	display: grid;
+	grid-gap: 20px;
+	justify-content: center;
+	align-items: center;
+}
+
+.Login-form {
+	text-align: center;
+}
+
+.form-nav {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: repeat(1fr);
+}
