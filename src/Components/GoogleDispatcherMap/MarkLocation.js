@@ -5,7 +5,7 @@ class MarkLocation extends Component {
 	render(){
 		return(
 			<div>
-				<MapRenderer location={this.props.location}/>
+				<MapRenderer/>
 			</div>
 		);
 	}

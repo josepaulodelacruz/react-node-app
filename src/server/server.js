@@ -6,8 +6,6 @@ const socket = require('socket.io');
 const port = process.env.PORT || 5000;
 var clients = [];
 var dispatcher = [];
-var lat = [];
-var longi = []; 
 
 
 app.get('/api/con', (req, res) => {
@@ -17,7 +15,7 @@ app.get('/api/con', (req, res) => {
 // on going TCP connection client-server
 const io = socket(server);
 io.on('connection', socket => {
-	socket.on('User', (Client) => {
+	socket.on('User', (Client) => {	
 		console.log(`${Client} User Connected: ${socket.id}`);
 		clients.push(socket.id);
 	})
@@ -27,9 +25,9 @@ io.on('connection', socket => {
 		dispatcher.push(dispatcher);
 	})
 	// for receiving an event to client.
-	socket.on('client', (latidute, longitude) => {
+	socket.on('client', (latidute, longitude, socketId) => {
 		console.log(`${socket.id}  Client's coordinates are:`, latidute, longitude);
-		io.sockets.emit('pass', latidute,longitude);
+		io.sockets.emit('pass', latidute,longitude, socketId);
 	})
 
 	

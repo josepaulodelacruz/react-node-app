@@ -1,0 +1,39 @@
+.Queing {
+	display: grid;
+	margin: 1rem;
+	background-color: #fff;
+	border-radius: 5px;
+	height: 100px;
+}
+
+.user-info {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: 25% 50% 1fr;
+	align-items: center;
+}
+
+.profile-pic {
+	display: grid;
+	background-image: url('../Assets/defaultPic.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+}
+
+
+.userInfo-text strong, p {
+	font-family: 'Arial Helvetica';
+	font-size: 10px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    margin: 0.5em;
+}
+
+.btn-ui {
+	text-align: center;
+}

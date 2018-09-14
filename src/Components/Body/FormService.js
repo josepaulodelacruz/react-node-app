@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
 import './FormServices.css';
 class FormService extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			formClient: {
+				address: ''
+			}
+		};
+	}
+
 	static defaultProps = {
 		destinations: ['Dita', 'Cabuyao Bayan', 'Balibago', 'Complex', 'Sala']
 	};
+
+	handleChange = (props) => {
+		this.setState({formClient: {
+			address: this.refs.destination.value
+		}},function(){
+			this.props.currentLocation(this.state.formClient);
+		})
+	}
 	render(){
 		let destinations = this.props.destinations.map(destination => {
 			return <option key={destination} ref={destination}>{destination}</option>;
@@ -14,7 +31,7 @@ class FormService extends Component {
 					<label>Current Location</label>
 					<input type="text" ref="location" placeholder="BLK 24 LOT 18"/>
 					<label>Destination</label>
-					<select>{destinations}</select>
+					<select onChange={this.handleChange.bind(this)} ref="destination">{destinations}</select>
 					<label>Estimated KM</label>
 					<label>4km</label>
 					<h3>₱ 50.00</h3>

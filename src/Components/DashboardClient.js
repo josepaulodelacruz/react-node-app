@@ -19,7 +19,8 @@ class DashboardClient extends Component {
       button: false,
       io: null,
       latitude: 0,
-      longitude: 0
+      longitude: 0,
+      currentLocation: ''
     };
   }
 
@@ -57,18 +58,27 @@ class DashboardClient extends Component {
   RenderCoordinates = (props) => {
      this.setState({latitude: props.latitude});
     this.setState({longitude: props.longitude});
-    console.log(this.state.latitude, this.state.longitude);
   }
 
-  handleClick = () => {
-    if(request < 1){
-      console.log(`${this.state.socket.id}  REQUEST`);
-    this.state.socket.emit('client', this.state.latitude, this.state.longitude);
-    request++;
-    }else{
-      alert('REQUEST LIMIT IS ONLY 1');
-      return 0;
-    }
+
+  handleClick = (props) => {
+    // if(request < 1){
+      if(this.state.currentLocation === ''){
+        this.setState({currentLocation: 'Dita'});
+      }else{
+        console.log(this.state.currentLocation);
+      }
+    const socketId = this.state.socket.id;
+    this.state.socket.emit('client', this.state.latitude, this.state.longitude, socketId);
+    // request++;
+    // }else{
+    //   alert('REQUEST LIMIT IS ONLY 1');
+    //   return 0;
+    // }
+  }
+
+  ClientLocation = (props) => {
+    this.setState({currentLocation: props.address});
   }
 
 
@@ -80,7 +90,7 @@ class DashboardClient extends Component {
               {/*Displaying Map from the main component*/}
               <GoogleMap ClientCoords={this.RenderCoordinates}/>
           </div>
-            <FormService/>
+            <FormService currentLocation={this.ClientLocation}/>
           <div className="btn-request">
              <button onClick={this.handleClick}>REQUEST</button> 
           </div>

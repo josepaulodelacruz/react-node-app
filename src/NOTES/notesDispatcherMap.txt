@@ -1,0 +1,127 @@
+import React, { Component } from 'react';
+import GoogleDispatcherMap from './GoogleDispatcherMap/GoogleMap';
+import NavBar from './NavBar';
+import io from 'socket.io-client';
+
+class Dispatcher extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			// endpoint: "http://192.168.0.15:5000",
+			io: null,
+			socket: null,
+			Dispatcher: 'Dispatcher',
+			coordinates: [
+				{
+					latitude: 14.2323,
+					longitude: 121.122323
+				}
+			]
+		};
+	}
+
+	componentWillMount(){
+		this.initSocket();
+	}
+
+
+	// Server Communication Dispatcher-to-server
+	 initSocket = () => {
+	   const socket = io(this.state.endpoint);
+	   socket.on('connect', (id) => {
+	        console.log(`Connected your SOCKET ID is ${socket.id}`);
+	        socket.emit('ServiceProvider', this.state.Dispatcher);
+	    });
+		   this.setState({socket});
+	 	}
+
+
+	render(){
+		const socket = io(this.state.endpoint);
+		socket.on('pass', (latitude, longitude) => {
+			this.setState({coordinates: [
+					{
+						latitude: latitude,
+						longitude: longitude
+					}
+				]
+			});
+		}) 	 	 	 	
+		return (
+			<div className="Dispatcher">
+				<header><NavBar/></header>
+				<div style={{paddingTop: '56px'}}>
+					<GoogleDispatcherMap location={this.state.coordinates}/>
+				</div>
+				<h3>{this.state.latitude}</h3>
+			</div>
+		);
+	}
+}
+
+export default Dispatcher;
+
+
+import React, { Component } from 'react';
+import MarkLocation from './MarkLocation';
+// const MAPBOX_TOKEN = 'pk.eyJ1IjoiamV5cGkiLCJhIjoiY2psOWI0MHA1M2ZuejNwcXJ1d2xjbXpiYyJ9.n8oaiL9SWvs1NJpx67_g6w'; 
+// Set your mapbox token here
+export default class GoogleMap extends Component {
+  render() {
+    return (
+      <MarkLocation location={this.props.location}/>
+      );
+  }
+}
+
+// 
+
+import React, { Component } from 'react';
+import MapRenderer from './MapRenderer';
+
+class MarkLocation extends Component {
+	render(){
+		return(
+			<div>
+				<MapRenderer location={this.props.location}/>
+			</div>
+		);
+	}
+}
+
+
+import React, { Component } from 'react';
+import ReactMapboxGl, {Marker} from "react-mapbox-gl";
+
+const Map = ReactMapboxGl({
+  accessToken:
+    'pk.eyJ1IjoiamV5cGkiLCJhIjoiY2psOWI0MHA1M2ZuejNwcXJ1d2xjbXpiYyJ9.n8oaiL9SWvs1NJpx67_g6w'
+});
+
+class MapRenderer extends Component {
+	render(){
+		let markLocations = this.props.location.map(markLocation => {
+			console.log(markLocation.latitude, markLocation.longitude);
+			return (
+			<Map
+		        style="mapbox://styles/mapbox/dark-v9"
+		        containerStyle={{
+		          height: "calc(100vh - 250px)",
+		          width: "100vw"
+		        }}
+		        center={[markLocation.longitude, markLocation.latitude]}
+		        zoom={[15]}
+		        key={markLocation}>
+		         <Marker key={markLocation} coordinates={[markLocation.longitude, markLocation.latitude]} anchor="bottom">
+		          <div className="mapMarkerStyle" onClick={this.handleClick} />
+		        </Marker>
+  			</Map>
+			);
+		})
+		return (
+		 	<div>{markLocations}</div>
+		);
+	}
+}
+
+export default MapRenderer;
