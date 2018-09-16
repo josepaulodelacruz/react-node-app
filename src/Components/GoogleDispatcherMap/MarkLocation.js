@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import MapRenderer from './MapRenderer';
-
+let userCoordinates = []
 class MarkLocation extends Component {
 	render(){
 		return(
 			<div>
-				<MapRenderer/>
+				<MapRenderer locateUserReq={this.props.locateUserReq}/>
 			</div>
 		);
 	}

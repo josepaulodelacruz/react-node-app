@@ -5,7 +5,7 @@ import MarkLocation from './MarkLocation';
 export default class GoogleMap extends Component {
   render() {
     return (
-      <MarkLocation/>
+      <MarkLocation locateUserReq={this.props.locateUserReq}/>
       );
   }
 }

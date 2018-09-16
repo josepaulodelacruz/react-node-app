@@ -25,9 +25,9 @@ io.on('connection', socket => {
 		dispatcher.push(dispatcher);
 	})
 	// for receiving an event to client.
-	socket.on('client', (latidute, longitude, socketId) => {
-		console.log(`${socket.id}  Client's coordinates are:`, latidute, longitude);
-		io.sockets.emit('pass', latidute,longitude, socketId);
+	socket.on('client', (latidute, longitude, socketId, desireLocation) => {
+		console.log(`${socket.id}  Client's coordinates are:`, latidute, longitude, 'Destination:',desireLocation);
+		io.sockets.emit('pass', latidute,longitude, socketId,desireLocation);
 	})
 
 	

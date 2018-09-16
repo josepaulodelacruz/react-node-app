@@ -20,7 +20,7 @@ class DashboardClient extends Component {
       io: null,
       latitude: 0,
       longitude: 0,
-      currentLocation: ''
+      desireLocation: ''
     };
   }
 
@@ -63,22 +63,24 @@ class DashboardClient extends Component {
 
   handleClick = (props) => {
     // if(request < 1){
-      if(this.state.currentLocation === ''){
-        this.setState({currentLocation: 'Dita'});
+      if(this.state.desireLocation === ''){
+        this.setState({desireLocation: 'Dita'});
       }else{
-        console.log(this.state.currentLocation);
+        console.log(this.state.desireLocation);
       }
     const socketId = this.state.socket.id;
-    this.state.socket.emit('client', this.state.latitude, this.state.longitude, socketId);
+    this.state.socket.emit('client', this.state.latitude, this.state.longitude, socketId, this.state.desireLocation);
     // request++;
     // }else{
     //   alert('REQUEST LIMIT IS ONLY 1');
     //   return 0;
     // }
+
+
   }
 
   ClientLocation = (props) => {
-    this.setState({currentLocation: props.address});
+    this.setState({desireLocation: props.address});
   }
 
 
