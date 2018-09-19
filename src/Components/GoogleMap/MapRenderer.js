@@ -8,6 +8,13 @@ const Map = ReactMapboxGl({
 
 class MapRenderer extends Component {
 	render(){
+		let clientReqs = this.props.destination.map(clientReq => {
+			return (
+				<Marker key={clientReq} coordinates={[clientReq.longi, clientReq.lat]} anchor="bottom">
+	          		<div className="mapMarkerStyleReq"/>
+	        	</Marker>
+			);
+		})
 		return (
 		 <Map
 	        style="mapbox://styles/mapbox/dark-v9"
@@ -16,10 +23,11 @@ class MapRenderer extends Component {
 	          width: "100vw"
 	        }}
 	        center={[this.props.longProps, this.props.latProps]}
-	        zoom={[15]}>
+	        zoom={[12]}>
 	        <Marker coordinates={[this.props.longProps, this.props.latProps]} anchor="bottom">
-	          <div className="mapMarkerStyle" onClick={this.handleClick} />
+	          <div className="mapMarkerStyle"/>
 	        </Marker>
+	        {clientReqs}
       	</Map>
 		);
 	}

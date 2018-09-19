@@ -12,7 +12,7 @@ class Queing extends Component {
 			socket: null,
 			Dispatcher: 'Dispatcher',
 			coordinates: {},
-			newCoordinates: []
+			clientDestination: []
 		};
 	}
 
@@ -33,14 +33,15 @@ class Queing extends Component {
 
 	 componentWillMount(){
 		const socket = io(this.state.endpoint);
-		socket.on('pass', (latitude, longitude,socketId, desireLocation) => {
+		socket.on('pass', (latitude, longitude,socketId, desireLocation, coordinates) => {
 			// console.log(`User id:${socketId}`, `${latitude}`, `${longitude}`, `${desireLocation}`);
 			this.setState({coordinates: 
 					{
 						id: socketId,
 						latitude: latitude,
 						longitude: longitude,
-						desireLocation: desireLocation
+						desireLocation: desireLocation,
+						reqCoordinates: coordinates
 					}	
 			},function(){
 				this.props.addUserLocation(this.state.coordinates);

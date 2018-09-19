@@ -9,7 +9,8 @@ class Dispatcher extends Component {
 		super(props);
 		this.state = {
 			newAddCoordinates: [],
-			locateUser: []
+			locateUser: [],
+			requestLocation: []
 		};
 	}
 

@@ -45,13 +45,15 @@ export default class GoogleMap extends Component {
            this.props.ClientCoords(this.state.viewport);
          })
       })
+      }else{
+        alert('Pls Turn on GPS High accuracy at settings');
       }
     }
 
   
   render() {
     return (
-      <MarkLocation coordinates={this.state.viewport}/>
+      <MarkLocation destination={this.props.destination} coordinates={this.state.viewport}/>
     );
   }
 }

@@ -18,6 +18,19 @@ class MapRenderer extends Component {
 	}
 
 	render(){
+		let MarkingDestinations = this.props.locateUserReq.map(MarkingDestination => {
+			return(
+				MarkingDestination.reqCoordinates.map(coordinates => {
+					return(
+						<Marker key={coordinates} coordinates={[coordinates.longi, coordinates.lat]} anchor="bottom">
+	          			<div className="mapMarkerStyleReq"/>
+	        			</Marker>
+					);
+				})
+			)
+			
+		})
+
 		let Users = this.props.locateUserReq.map(User => {
 			return(
 			<Marker key={User.id} coordinates={[User.longitude, User.latitude]} anchor="bottom">
@@ -33,8 +46,9 @@ class MapRenderer extends Component {
 	          width: "100vw"
 	        }}
 	        center={[this.state.coordinates.longitude, this.state.coordinates.latitude]}
-	        zoom={[11]}>
+	        zoom={[13]}>
 	        {Users}
+	        {MarkingDestinations}
   		</Map>
 		);
 	}		

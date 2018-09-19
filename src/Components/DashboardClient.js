@@ -10,6 +10,7 @@ class DashboardClient extends Component {
   constructor(props){
     super(props);
     this.state = {
+      coordinates: [],
       // endpoint: "http://192.168.0.14:5000",
       // endpoint: "http://localhost:5000",
       Client: 'Client',
@@ -63,13 +64,8 @@ class DashboardClient extends Component {
 
   handleClick = (props) => {
     // if(request < 1){
-      if(this.state.desireLocation === ''){
-        this.setState({desireLocation: 'Dita'});
-      }else{
-        console.log(this.state.desireLocation);
-      }
     const socketId = this.state.socket.id;
-    this.state.socket.emit('client', this.state.latitude, this.state.longitude, socketId, this.state.desireLocation);
+    this.state.socket.emit('client', this.state.latitude, this.state.longitude, socketId, this.state.desireLocation, this.state.coordinates);
     // request++;
     // }else{
     //   alert('REQUEST LIMIT IS ONLY 1');
@@ -81,6 +77,12 @@ class DashboardClient extends Component {
 
   ClientLocation = (props) => {
     this.setState({desireLocation: props.address});
+    this.setState({coordinates: [
+      {
+        lat: props.latitude,
+        longi: props.longitude
+      }
+    ]})
   }
 
 
@@ -90,7 +92,7 @@ class DashboardClient extends Component {
         <NavBar/>
           <div className="content" style={{paddingTop: '50px'}}>
               {/*Displaying Map from the main component*/}
-              <GoogleMap ClientCoords={this.RenderCoordinates}/>
+              <GoogleMap ClientCoords={this.RenderCoordinates} destination={this.state.coordinates}/>
           </div>
             <FormService currentLocation={this.ClientLocation}/>
           <div className="btn-request">

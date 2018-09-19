@@ -7,6 +7,10 @@ class QueDisplay extends Component {
 		this.props.locateUser(userRequest);
 	}
 
+	handleAccept = () => {
+		console.log('click');
+	}
+
 	render(){
 		let userRequests = this.props.coordinates.map(userRequest => {
 			return (
@@ -21,7 +25,7 @@ class QueDisplay extends Component {
 					<p>Time: </p>	
 				</div>
 				<div className="btn-ui">
-					<h3 style={{color: 'blue',fontSize: '20px', margin: '5px'}}>✔</h3>
+					<h3 style={{color: 'blue',fontSize: '20px', margin: '5px'}} onClick={this.handleAccept.bind(this)}>✔</h3>
 					<h3 style={{color: 'red', fontSize: '20px', margin: '5px'}}>📧</h3>
 					<h3 style={{color: 'red', fontSize: '20px', margin: '5px'}}>✘</h3>
 				</div>
