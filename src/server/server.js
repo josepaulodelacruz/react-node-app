@@ -4,6 +4,7 @@ const http = require('http');
 const server = http.createServer(app);
 const socket = require('socket.io');
 const port = process.env.PORT || 5000;
+const path = require('path');
 var clients = [];
 var dispatcher = [];
 
@@ -11,6 +12,15 @@ var dispatcher = [];
 app.get('/api/con', (req, res) => {
   res.send({ express: 'Back end server connected' });
 });
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+}
 
 // on going TCP connection client-server
 const io = socket(server);
