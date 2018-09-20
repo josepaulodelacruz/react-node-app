@@ -13,6 +13,8 @@ app.get('/api/con', (req, res) => {
   res.send({ express: 'Back end server connected' });
 });
 
+app.use( express.static(__dirname + '/../../build') );
+
 // on going TCP connection client-server
 const io = socket(server);
 io.on('connection', socket => {

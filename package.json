@@ -21,15 +21,15 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "concurrently --kill-others \"set HTTPS=true&&npm run react\" \"npm run server\"",
+    "start": "node src/server/server.js",
+    "dev": "concurrently --kill-others \"set HTTPS=true&&npm run react\" \"npm run server\"",
     "react": "react-scripts start",
     "server": "nodemon src/server/server.js",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm install && npm run build",
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "concurrently": "^3.6.1",
