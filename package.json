@@ -27,9 +27,9 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "heroku-postbuild": "npm install && npm run build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm start"
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "concurrently": "^3.6.1",
