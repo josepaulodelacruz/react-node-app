@@ -20,7 +20,6 @@ const io = socket(server);
 io.on('connection', socket => {
 	socket.on('User', (Client) => {	
 		console.log(`${Client} User Connected: ${socket.id}`);
-		clients.push(socket.id);
 	})
 
 	socket.on('ServiceProvider', Dispatcher => {
@@ -31,7 +30,14 @@ io.on('connection', socket => {
 	socket.on('client', (latidute, longitude, socketId, desireLocation, coordinates) => {
 		console.log(`${socket.id}  Client's coordinates are:`, latidute, longitude, 'Destination:',desireLocation, coordinates);
 		io.sockets.emit('pass', latidute,longitude, socketId,desireLocation, coordinates);
+		clients.push(socketId);
+		console.log(clients);
 	})
+
+	socket.on('decline', decline => {
+		console.log('Your request has been decline');
+		io.sockets.emit('declinedReceive', decline);
+	});
 
 	
 

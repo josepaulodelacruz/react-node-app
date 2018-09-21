@@ -64,7 +64,7 @@ class DashboardClient extends Component {
 
   handleClick = (props) => {
     // if(request < 1){
-    const socketId = this.state.socket.id;
+    let socketId = this.state.socket.id;
     this.state.socket.emit('client', this.state.latitude, this.state.longitude, socketId, this.state.desireLocation, this.state.coordinates);
     // request++;
     // }else{
@@ -84,6 +84,12 @@ class DashboardClient extends Component {
       }
     ]})
   }
+
+  componentDidMount(){
+    this.state.socket.on('declinedReceive', decline => {
+      alert('Your Request Has Been Decline');
+    })
+  } 
 
 
   render() {
