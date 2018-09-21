@@ -23,20 +23,18 @@ io.on('connection', socket => {
 	})
 
 	socket.on('ServiceProvider', Dispatcher => {
-		console.log(`${Dispatcher} is Connected ` + socket.id);
-		dispatcher.push(dispatcher);
+		console.log(`Dispatcher ${Dispatcher} is Connected`);
 	})
 	// for receiving an event to client.
 	socket.on('client', (latidute, longitude, socketId, desireLocation, coordinates) => {
 		console.log(`${socket.id}  Client's coordinates are:`, latidute, longitude, 'Destination:',desireLocation, coordinates);
 		io.sockets.emit('pass', latidute,longitude, socketId,desireLocation, coordinates);
-		clients.push(socketId);
 		console.log(clients);
 	})
 
-	socket.on('decline', decline => {
-		console.log('Your request has been decline');
-		io.sockets.emit('declinedReceive', decline);
+	socket.on('decline', id => {
+		console.log(`Send to ${id} Your request has been decline`);
+		io.to(id).emit('declinedReceive', id);
 	});
 
 	

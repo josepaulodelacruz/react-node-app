@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://josepaulodelacruz.github.io/react-node-app",
   "dependencies": {
+    "@material-ui/core": "^3.1.0",
     "express": "^4.16.3",
     "google-maps-react": "^2.0.2",
     "mapbox-gl": "^0.48.0",
@@ -13,6 +14,7 @@
     "react-geolocated": "^2.4.0",
     "react-map-gl": "^3.3.4",
     "react-mapbox-gl": "^3.9.2",
+    "react-mdl": "^1.11.0",
     "react-native-mapbox-gl": "^5.2.1-deprecated",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",

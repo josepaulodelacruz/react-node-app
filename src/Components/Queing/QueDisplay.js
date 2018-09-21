@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
+import { Dialog, DialogActions, Button, DialogTitle, DialogContent} from 'react-mdl';
 import './Queing.css';
 
+
 class QueDisplay extends Component {
+	state = {
+		click: false,
+		openDialog: false
+	}
 
 	handleClick(userRequest){
 		this.props.locateUser(userRequest);
 	}
 
-	handleAccept = (id) => {
+	handleDelete = (id) => {
 		this.props.onDelete(id);
+	}
+
+
+	HandleAcceptRequest(){
+		this.setState({openDialog: true});
+	}
+
+	handleClose(){
+		this.setState({openDialog: false});
 	}
 
 	render(){
@@ -25,16 +40,41 @@ class QueDisplay extends Component {
 					<p>Time: </p>	
 				</div>
 				<div className="btn-ui">
-					<h3 style={{color: 'blue',fontSize: '20px', margin: '5px'}}>✔</h3>
+					<h3 style={{color: 'blue',fontSize: '20px', margin: '5px'}} onClick={this.HandleAcceptRequest.bind(this)}>✔</h3>
 					<h3 style={{color: 'red', fontSize: '20px', margin: '5px'}}>📧</h3>
-					<h3 style={{color: 'red', fontSize: '20px', margin: '5px'}}onClick={this.handleAccept.bind(this, userRequest.id)}>✘</h3>
+					<h3 style={{color: 'red', fontSize: '20px', margin: '5px'}} onClick={this.handleDelete.bind(this, userRequest.id)}>✘</h3>
 				</div>
 			</div>
 			</section>
 			);
 		});
 		return (
-			<div>{userRequests}</div>
+			<div>
+				{userRequests}
+		        <div>
+		        <Dialog open={this.state.openDialog}>
+		          <DialogTitle style={{margin: '0px'}}>Tricycle Deployment Information</DialogTitle>
+		          <DialogContent>
+		          	<form style={{margin: 'auto'}}>
+		          	<div style={{display: 'grid', justifyContent: 'center'}}>
+		          		<h3 style={{textAlign: 'center'}}>Conduction Sticker</h3>
+		            	<input style={{fontSize: '18px', textAlign: 'center', margin: 'auto', height: '40px'}} type="text" ref="sticker"/>
+		          	</div>
+		          	<div style={{display: 'grid', justifyContent: 'center'}}>
+		          		<h3 style={{textAlign: 'center'}}>Plate Number</h3>
+		            	<h3 style={{fontSize: '18px', textAlign: 'center', margin: 'auto', height: '40px'}} type="text" ref="plateNumber"></h3>
+		          	</div>
+		          	<div style={{display: 'grid', justifyContent: 'center', marginTop: '10px'}}>
+		          		<h3 style={{textAlign: 'center',  margin: '0px'}}>Operator's Contact</h3>
+		            	<h3>Contact #:09123456789</h3>
+		          	</div>			          			
+		          	</form>
+		          </DialogContent>
+		        	 <button type="button">Deploy</button>
+		        	 <button type="button" onClick={this.handleClose.bind(this)}>Cancel</button>
+		        </Dialog>
+		      </div>
+			</div>
 		);
 	}
 }

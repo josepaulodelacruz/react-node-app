@@ -25,8 +25,9 @@ class Dispatcher extends Component {
 	initSocket = () => {
 	   const socket = io(this.state.endpoint);
 	   socket.on('connect', (id) => {
+	   		let Dispatcher = socket.id;
 	        console.log(`Connected your SOCKET ID is ${socket.id}`);
-	        socket.emit('ServiceProvider', this.state.Dispatcher);
+	        socket.emit('ServiceProvider', Dispatcher);
    		 });
 		   this.setState({socket});
  	}
@@ -47,7 +48,7 @@ class Dispatcher extends Component {
 		let index = del.findIndex(x => x.id === id);
 		del.splice(index, 1);
 		this.setState({newAddCoordinates: del});
-		this.state.socket.emit('decline', this.state.decline);
+		this.state.socket.emit('decline', id);
 	}
 
 
