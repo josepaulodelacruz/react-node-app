@@ -92,6 +92,13 @@ class DashboardClient extends Component {
   } 
 
 
+  componentDidMount(){
+    this.state.socket.on('AcceptRequest', id => {
+      alert('Your Request has been accepted');
+    });
+  }
+
+
   render() {
     return (
       <div>

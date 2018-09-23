@@ -46,7 +46,8 @@ class UserLogin extends Component {
         if(props.userLogin === user.username && props.passLogin === user.password){
           console.log('sucess');
           this.setState({currentLogin: user});
-          this.setState({redirect: true});  
+          this.setState({redirect: true});
+
         }else {
           this.setState({error: true});
         }

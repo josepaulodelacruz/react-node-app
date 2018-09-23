@@ -31,11 +31,16 @@ io.on('connection', socket => {
 		io.sockets.emit('pass', latidute,longitude, socketId,desireLocation, coordinates);
 		console.log(clients);
 	})
-
+	// Sending to specific Client
 	socket.on('decline', id => {
 		console.log(`Send to ${id} Your request has been decline`);
 		io.to(id).emit('declinedReceive', id);
 	});
+
+	socket.on('accept', id => {
+		console.log(`Accept Request ${id} Tricle Deployed`);
+		io.to(id).emit('AcceptRequest', id);
+	})
 
 	
 

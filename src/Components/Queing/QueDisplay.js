@@ -6,7 +6,8 @@ import './Queing.css';
 class QueDisplay extends Component {
 	state = {
 		click: false,
-		openDialog: false
+		openDialog: false,
+		acceptRequest: []
 	}
 
 	handleClick(userRequest){
@@ -23,6 +24,11 @@ class QueDisplay extends Component {
 	}
 
 	handleClose(){
+		this.setState({openDialog: false});
+	}
+
+	handleDeploy(id){
+		this.props.deployment(id);
 		this.setState({openDialog: false});
 	}
 
@@ -45,13 +51,7 @@ class QueDisplay extends Component {
 					<h3 style={{color: 'red', fontSize: '20px', margin: '5px'}} onClick={this.handleDelete.bind(this, userRequest.id)}>✘</h3>
 				</div>
 			</div>
-			</section>
-			);
-		});
-		return (
 			<div>
-				{userRequests}
-		        <div>
 		        <Dialog open={this.state.openDialog}>
 		          <DialogTitle style={{margin: '0px'}}>Tricycle Deployment Information</DialogTitle>
 		          <DialogContent>
@@ -70,13 +70,20 @@ class QueDisplay extends Component {
 		          	</div>			          			
 		          	</form>
 		          </DialogContent>
-		        	 <button type="button">Deploy</button>
+		        	 <button type="button" onClick={this.handleDeploy.bind(this, userRequest.id)}>Deploy</button>
 		        	 <button type="button" onClick={this.handleClose.bind(this)}>Cancel</button>
 		        </Dialog>
 		      </div>
+			</section>
+			)
+		});
+		return (
+			<div>
+				{userRequests}
 			</div>
-		);
+		)
 	}
 }
+
 
 export default QueDisplay;

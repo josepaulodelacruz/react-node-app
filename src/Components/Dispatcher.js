@@ -51,7 +51,15 @@ class Dispatcher extends Component {
 		this.state.socket.emit('decline', id);
 	}
 
-
+	handleDeployment(id){
+		let dep = this.state.newAddCoordinates;
+		let index = dep.findIndex(x => x.id === id);
+		dep.splice(index, 1);
+		this.setState({newAddCoordinates: dep},function(){
+			console.log(id);
+		})
+		this.state.socket.emit('accept', id);
+	}
 
 	render(){
 		return (
@@ -61,7 +69,7 @@ class Dispatcher extends Component {
 					<GoogleDispatcherMap locateUserReq={this.state.locateUser}/>
 				</div>
 				<Queing addUserLocation={this.handleAddRequest.bind(this)}/>
-				<QueDisplay onDelete={this.handleDeleteRequest.bind(this)} locateUser={this.handleLocateUser.bind(this)} coordinates={this.state.newAddCoordinates}/>
+				<QueDisplay deployment={this.handleDeployment.bind(this)} onDelete={this.handleDeleteRequest.bind(this)} locateUser={this.handleLocateUser.bind(this)} coordinates={this.state.newAddCoordinates}/>
 			</div>
 		);
 	}
