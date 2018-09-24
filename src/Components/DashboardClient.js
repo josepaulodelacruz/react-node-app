@@ -89,14 +89,11 @@ class DashboardClient extends Component {
     this.state.socket.on('declinedReceive', id => {
       alert('Your Request Has Been Decline');
     })
-  } 
 
-
-  componentDidMount(){
     this.state.socket.on('AcceptRequest', id => {
       alert('Your Request has been accepted');
     });
-  }
+  } 
 
 
   render() {
